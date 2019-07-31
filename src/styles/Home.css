@@ -1,0 +1,54 @@
+.person-wrapper {
+  margin-bottom: 2em;
+}
+
+.profile-pic {
+  width: 50%;
+}
+
+.btn-primary {
+  background-image: none;
+  border: none;
+  border-radius: 0;
+  /* background-color: #2892D7; */
+}
+
+.h2 {
+  font-size: 60px;
+  margin-left: 24px;
+}
+
+.home {
+  /* background-color: red; */
+  display: 'flex';
+  flex: 1;
+}
+
+.gameContainer {
+  display: 'flex';
+  flex: 1;
+  height: 400px;
+  /* background-color: red; */
+}
+
+.imageContainer {
+  display: 'flex';
+  /* flex-direction: "row"; */
+  /* flex: 1; */
+  height: 400px;
+  /* background-color: blue; */
+}
+
+.imageContainer2 {
+  /* display: 'flex'; */
+  /* flex: 1; */
+  height: 200px;
+  /* background-color: yellow; */
+  justify-content: 'center';
+  align-items: 'center';
+}
+
+.img {
+  height: 200px;
+
+}
