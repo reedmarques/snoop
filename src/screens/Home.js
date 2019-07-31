@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Container, Row, Col, Image } from 'react-bootstrap';
+import { Button, Container, Row, Col, Image, Spinner, Pill, Badge } from 'react-bootstrap';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import '../styles/Home.css';
+import ProgressBar from '../components/ProgressBar';
 
 export default class Home extends Component {
 
@@ -17,6 +18,9 @@ export default class Home extends Component {
     show3: false,
     lock: false,
     correct: false,
+    percentage:0,
+    totalPlays: 0,
+    correctPlays: 0,
   }
 
   componentDidMount() {
@@ -33,10 +37,17 @@ export default class Home extends Component {
   }
   //
 
-  click(value) {
+  click(value){
     if (this.state.lock) {
       return
     }
+
+    // increase total plays
+    var totalPlays = this.state.totalPlays;
+    totalPlays = totalPlays + 1;
+
+    var correctPlays = this.state.correctPlays;
+    
     var currentStreak;
     var timeoutLength;
     if (value == this.state.targetIndex) {
@@ -49,6 +60,10 @@ export default class Home extends Component {
       // add to streak
       currentStreak = this.state.currentStreak + 1;
       // change picture accordingly
+
+      // increaes correctPlay number
+
+      correctPlays = correctPlays + 1;
 
     } else {
       // lose, reset streak
@@ -68,16 +83,30 @@ export default class Home extends Component {
 
     this.setState({ currentStreak })
 
+    // update high score
     if (currentStreak > this.state.highScore) {
       const highScore = this.state.highScore + 1
       this.setState({ highScore })
     }
 
+    this.setState({ correctPlays, totalPlays }, () => this.calculatePercentage())
+
+    // get new target index
     this.assignTargetIndex()
 
+
+
+    // make page freeze for given duration
     setTimeout(() => {
       this.resetValues()
     }, timeoutLength);
+
+
+  }
+
+  calculatePercentage(){
+    var perc = this.state.correctPlays / this.state.totalPlays * 100;
+    this.setState({percentage:perc})
 
   }
 
@@ -120,8 +149,13 @@ export default class Home extends Component {
             <p style={{paddingRight: 64, fontFamily: 'Roboto', fontSize:30}}>Current Streak: {this.state.currentStreak}</p>
             <p style={{paddingLeft: 64, fontFamily: 'Roboto', fontSize:30, color: 'red'}}>High Score: {this.state.highScore}</p>
           </div>
+          <div style={{paddingLeft:'40%'}}>
+            <ProgressBar percentage={this.state.percentage}/>
+          </div>
+
 
         </div>
+
       </div>
     );
   }
