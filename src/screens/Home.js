@@ -47,7 +47,7 @@ export default class Home extends Component {
     totalPlays = totalPlays + 1;
 
     var correctPlays = this.state.correctPlays;
-    
+
     var currentStreak;
     var timeoutLength;
     if (value == this.state.targetIndex) {
@@ -131,7 +131,7 @@ export default class Home extends Component {
     return (
       <div className="home">
         <h2 className="h2">Snoop Dog or Poop dog</h2>
-        <p style={{marginTop:-50, paddingBottom:50, marginLeft: 24}}>Lets get it</p>
+        <p style={{marginTop:-50, paddingBottom:30, marginLeft: 24}}>Lets get it</p>
         <div className="gameContainer">
           <div className="imageContainer"
             style={{
@@ -152,7 +152,7 @@ export default class Home extends Component {
           <div style={{paddingLeft:'40%'}}>
             <ProgressBar percentage={this.state.percentage}/>
           </div>
-
+          <p style={{paddingLeft:'50%', fontFamily: 'Roboto', fontSize:30, color:this.state.percentage>33 ? 'green' : 'red'}}>{this.state.totalPlays>0 ? `${this.state.percentage.toFixed(0)}%` : ``}</p>
 
         </div>
 
